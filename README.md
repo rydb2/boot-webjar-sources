@@ -1,18 +1,18 @@
-** boot-webjar-sources
+## boot-webjar-sources
 -----
-[![Clojars Project](https://img.shields.io/clojars/v/rydb2/boot-webjar-sources.svg)](https://clojars.org/rydb2/boot-webjar-sources)
+[![Clojars Project](https://img.shields.io/clojars/v/rydb2/boot-webjar-sources.svg)](https://clojars.org/rydb2/boot-webjar-sources)  
   A simple `webjar-sources` task that allows boot copy sources in webjar (like font file), into `target` directory (set in boot task).
 
 -----
-*** Usage
+### Usage
 add `rydb2/boot-webjar-sources` to `build.boot` dependencies  
 
-**** params:
+#### params:
 - `name`: webjar name
 - `matching`: regex string, will used to filter the sources in webjar
 - `target`: path that files passed matching in webjar will be copied to
 
-**** Example of build.boot
+#### Example of build.boot
 `cpy` task will copy *.woff/*.woff2 in `org.webjars/materializecss` to `target/fonts/roboto/`
 ```clojure
 (set-env!
