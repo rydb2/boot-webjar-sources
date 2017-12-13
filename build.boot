@@ -9,7 +9,7 @@
 (require '[rydb2.boot-webjar-sources :refer [webjar-sources]]
          '[adzerk.bootlaces :refer :all])
 
-(def +version+ "0.0.1")
+(def +version+ "0.0.1-SNAPSHOT")
 
 (task-options!
   webjar-sources {:name "materializecss"

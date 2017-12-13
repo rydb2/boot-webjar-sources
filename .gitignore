@@ -12,3 +12,5 @@ tmp
 .tmp
 \#*
 .\#*
+.nrepl-history
+.nrepl-port

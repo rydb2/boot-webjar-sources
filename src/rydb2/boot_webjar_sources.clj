@@ -62,6 +62,6 @@
             (io/make-parents (.getParent out-file))
             (io/copy in-file out-file))))
      (-> fileset
-         (core/add-resource (io/file (.getParent (io/file target))))
+         (core/add-resource (io/file (first (str/split target "/"))))
          core/commit!))))
 
