@@ -9,12 +9,12 @@
 (require '[rydb2.boot-webjar-sources :refer [webjar-sources]]
          '[adzerk.bootlaces :refer :all])
 
-(def +version+ "0.0.1-SNAPSHOT")
+(def +version+ "0.1.0")
 
 (task-options!
   webjar-sources {:name "materializecss"
                   :matching ".*/fonts/.*.(woff|woff2|ttf)$"
-                  :target "target/fonts"}
+                  :target "fonts/roboto"}
   pom {:project     'rydb2/boot-webjar-sources
        :version     +version+
        :description "Boot task to copy sources in webjar (like fonts)"

@@ -1,5 +1,5 @@
 (ns rydb2.boot-webjar-sources
-  ;; {:boot/export-tasks true}
+  {:boot/export-tasks true}
   (:require
    [clojure.java.io :as io]
    [boot.pod        :as pod]
@@ -44,24 +44,26 @@
 
 (core/deftask webjar-sources
   "copy webjar sources"
-  [n name str "webjar name"
-   m matching str "sources path regex string in webjar"
-   t target str "output dir"]
-  (let [entries (get-entries name matching)
-        jar-file (get-jar-file name)]
-    (core/with-pre-wrap fileset
+  [n name VAL str "webjar name"
+   m matching VAL str "sources path regex string in webjar"
+   t target VAL str] "output dir"
+  (core/with-pre-wrap fileset
+    (let [input-files (core/input-files fileset)
+          entries (get-entries name matching)
+          jar-file (get-jar-file name)
+          tmp (core/tmp-dir!)]
+      (core/empty-dir! tmp)
       (doseq [entry entries]
         (let [jar-name (.getName ^JarEntry entry)
               in-file (.getInputStream jar-file entry)
               out-file (doto
-                           (io/file target (get-file-name jar-name))
-                           io/make-parents)
+                         (io/file tmp target (get-file-name jar-name))
+                         io/make-parents)
               tmp-in-files (core/input-files fileset)]
           (do
-            (util/info "%s\ncopy %s \nto   %s\n" name (.getName ^JarEntry entry) out-file)
-            (io/make-parents (.getParent out-file))
+            (util/info "%s\ncopy %s \nto   %s\n" name (.getName ^JarEntry entry) target)
             (io/copy in-file out-file))))
-     (-> fileset
-         (core/add-resource (io/file (first (str/split target "/"))))
-         core/commit!))))
+      (-> fileset
+        (core/add-resource tmp)
+        core/commit!))))
 
