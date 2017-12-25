@@ -58,8 +58,7 @@
               in-file (.getInputStream jar-file entry)
               out-file (doto
                          (io/file tmp target (get-file-name jar-name))
-                         io/make-parents)
-              tmp-in-files (core/input-files fileset)]
+                         io/make-parents)]
           (do
             (util/info "%s\ncopy %s \nto   %s\n" name (.getName ^JarEntry entry) target)
             (io/copy in-file out-file))))
